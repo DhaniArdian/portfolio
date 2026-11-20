@@ -1,0 +1,302 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+
+  /* Red Bull Racing — deep matte navy dominant, restrained accents */
+  --background: #070a1c;      /* deep matte navy page */
+  --panel: #0d1128;          /* recessed */
+  --surface: #0c1026;        /* raised card */
+  --foreground: #eceff7;     /* cool off-white */
+
+  --card: #0c1026;
+  --card-foreground: #eceff7;
+  --popover: #0c1026;
+  --popover-foreground: #eceff7;
+
+  --primary: #070a1c;
+  --primary-foreground: #eceff7;
+
+  --secondary: #0d1128;
+  --secondary-foreground: #c2c8dc;
+  --muted: #0d1128;
+  --muted-foreground: #7a819c;
+
+  /* Red Bull red — used sparingly, for key emphasis only */
+  --accent: #e2001a;
+  --accent-foreground: #ffffff;
+
+  /* steel blue — quiet secondary for labels/lines */
+  --accent-2: #9fb2d9;
+  --accent-2-foreground: #070a1c;
+
+  /* amber highlight — the nose/airbox warm note, used rarely */
+  --accent-3: #f2a63c;
+  --accent-3-foreground: #1a0e02;
+
+  /* deepest ink for full-bleed contrast sections */
+  --ink: #05081a;
+  --ink-foreground: #eceff7;
+
+  --marker: #9fb2d9;
+
+  --line: rgba(236, 239, 247, 0.08);
+  --line-strong: rgba(236, 239, 247, 0.16);
+
+  --border: rgba(236, 239, 247, 0.10);
+  --input: rgba(236, 239, 247, 0.16);
+  --input-background: rgba(236, 239, 247, 0.04);
+
+  --radius: 0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-panel: var(--panel);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-2: var(--accent-2);
+  --color-accent-2-foreground: var(--accent-2-foreground);
+  --color-accent-3: var(--accent-3);
+  --color-accent-3-foreground: var(--accent-3-foreground);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-marker: var(--marker);
+  --color-border: var(--border);
+  --color-input: var(--input);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-none;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-family: "Saira", system-ui, sans-serif;
+    background-color: var(--background);
+    background-image:
+      radial-gradient(70rem 50rem at 85% -10%, rgba(226, 0, 26, 0.08), transparent 62%),
+      radial-gradient(60rem 50rem at 8% 105%, rgba(159, 178, 217, 0.05), transparent 60%);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "Saira Condensed", "Saira", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--panel); }
+  ::-webkit-scrollbar-thumb { background: var(--line-strong); border: 3px solid var(--panel); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+}
+
+/* Faint engineering grid */
+.paper-grid {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.paper-grid-fine {
+  background-image:
+    linear-gradient(rgba(238,241,251,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(238,241,251,0.05) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+/* Sharp chamfered corners — the one structural signature */
+.chamfer {
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+}
+.chamfer-lg {
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+}
+.chamfer-btn {
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+.chamfer-tl-br {
+  clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+}
+
+/* Full-bleed dark section (grid texture baked in) */
+.section-ink {
+  background-color: var(--ink);
+  color: var(--ink-foreground);
+  background-image:
+    linear-gradient(rgba(238,241,251,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(238,241,251,0.045) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.card-ink {
+  background: rgba(238,241,251, 0.03);
+  border: 1px solid rgba(238,241,251, 0.14);
+}
+
+/* Marquee */
+.marquee { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+.marquee-track:hover .marquee { animation-play-state: paused; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* Big outline display type */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(236, 239, 247, 0.85);
+}
+
+/* Accent gradient text — teal → mint */
+.text-gradient-warm {
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gradient fill for buttons/marquee */
+.bg-gradient-warm {
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 100%);
+}
+
+/* Soft ambient glow behind an element */
+.glow-warm { box-shadow: 0 40px 120px -40px rgba(226, 0, 26, 0.35), 0 20px 60px -30px rgba(0,0,0,0.7); }
+.glow-jade { box-shadow: 0 0 80px -20px rgba(159, 178, 217, 0.3); }
+
+/* Raised card */
+.card-paper {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.28);
+}
+
+/* Ticked corner registration marks (subtle, printed look) */
+.tick-corners { position: relative; }
+.tick-corners::before,
+.tick-corners::after {
+  content: "";
+  position: absolute;
+  width: 9px; height: 9px;
+  border-color: var(--line-strong);
+  pointer-events: none;
+}
+.tick-corners::before { top: 8px; left: 8px; border-top: 1.5px solid; border-left: 1.5px solid; }
+.tick-corners::after  { bottom: 8px; right: 8px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
+
+/* Pressable button feel — physical, no neon */
+.press {
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  box-shadow: 3px 3px 0 rgba(33, 28, 22, 0.85);
+}
+.press:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 rgba(33, 28, 22, 0.85); }
+.press:active { transform: translate(3px, 3px); box-shadow: 0 0 0 rgba(33, 28, 22, 0.85); }
+
+.press-accent { box-shadow: 3px 3px 0 var(--accent); }
+.press-accent:hover { box-shadow: 4px 4px 0 var(--accent); }
+.press-accent:active { box-shadow: 0 0 0 var(--accent); }
+
+/* Underline that draws in on hover */
+.link-underline {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease;
+}
+.link-underline:hover { background-size: 100% 2px; }
+
+/* ============================================================================
+ *  F1 MOTORSPORT UTILITIES
+ * ==========================================================================*/
+
+/* Carbon-fibre weave texture */
+.carbon {
+  background-color: var(--ink);
+  background-image:
+    linear-gradient(27deg, rgba(255,255,255,0.028) 1px, transparent 1px),
+    linear-gradient(-27deg, rgba(255,255,255,0.028) 1px, transparent 1px),
+    linear-gradient(27deg, rgba(0,0,0,0.35) 1px, transparent 1px),
+    linear-gradient(-27deg, rgba(0,0,0,0.35) 1px, transparent 1px);
+  background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px;
+  background-position: 0 0, 4px 0, 4px 4px, 0 4px;
+}
+
+/* Diagonal racing hazard stripes (livery accent) */
+.hazard {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--accent) 0, var(--accent) 12px,
+    transparent 12px, transparent 24px,
+    var(--accent-2) 24px, var(--accent-2) 36px,
+    transparent 36px, transparent 48px
+  );
+}
+
+/* Checkered flag strip */
+.checker {
+  background-image:
+    linear-gradient(45deg, currentColor 25%, transparent 25%, transparent 75%, currentColor 75%),
+    linear-gradient(45deg, currentColor 25%, transparent 25%, transparent 75%, currentColor 75%);
+  background-size: 12px 12px;
+  background-position: 0 0, 6px 6px;
+}
+
+/* Angled parallelogram tab (livery shard) */
+.skew-tab { transform: skewX(-12deg); }
+.skew-tab > * { transform: skewX(12deg); }
+
+/* Number plate — big driver number */
+.plate {
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+}
+
+/* Red accent left rail that grows on hover */
+.rail { position: relative; }
+.rail::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  transform: scaleY(0.28);
+  transform-origin: top;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.rail:hover::before { transform: scaleY(1); }
+
+/* Telemetry pulse dot */
+.pulse-dot { position: relative; }
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  border: 1px solid var(--accent);
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.7); opacity: 0.9; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
